@@ -3,50 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day App</title>
+    <title>Stitch and Lilo's Romantic Screens</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ffe6f2;
-            color: #b30047;
+            background-color: #f8f8f8;
             text-align: center;
-            animation: fadeIn 1s;
+            padding: 20px;
         }
-        h1 {
-            font-size: 2.5em;
-            margin-top: 20px;
+        .screen {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s;
         }
-        #heart {
-            font-size: 100px;
-            animation: heartbeat 1.5s infinite;
+        .screen:hover {
+            transform: scale(1.05);
         }
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff69b4;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff1493;
         }
     </style>
 </head>
 <body>
-    <h1>Happy Valentine's Day!</h1>
-    <div id="heart">❤️</div>
-    <p>Welcome to our romantic Valentine's Day app!</p>
-    <p>Are you ready to explore multiple romantic screens? Let's go!</p>
-    <div>
-        <button onclick="startApp()">Start Your Journey</button>
+    <h1>Stitch and Lilo's Romantic Moments</h1>
+    <div class="screen">
+        <img src="stitch-lilo-romantic.jpg" alt="Stitch and Lilo" />
+        <h2>Moment 1</h2>
+        <p>Enjoy a beautiful sunset with Stitch and Lilo.</p>
+        <button onclick="alert('You clicked Moment 1!')">View More</button>
     </div>
-    <script>
-        function startApp() {
-            alert("Let's create wonderful memories this Valentine's Day!");
-            // Here, you can add further interactive elements and navigate to other screens.
-        }
-    </script>
+    <div class="screen">
+        <img src="stitch-lilo-kiss.jpg" alt="Stitch and Lilo Kiss" />
+        <h2>Moment 2</h2>
+        <p>A sweet kiss under the stars.</p>
+        <button onclick="alert('You clicked Moment 2!')">View More</button>
+    </div>
+    <div class="screen">
+        <img src="stitch-lilo-dance.jpg" alt="Stitch and Lilo Dance" />
+        <h2>Moment 3</h2>
+        <p>Dance the night away with Stitch and Lilo.</p>
+        <button onclick="alert('You clicked Moment 3!')">View More</button>
+    </div>
 </body>
 </html>

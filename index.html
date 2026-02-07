@@ -5,65 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentine's Day App</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 20px; }
-        #prompt { font-size: 24px; margin-bottom: 20px; }
-        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
-        #success { display: none; font-size: 28px; color: green; margin-top: 20px; }
-        #confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f2;
+            color: #b30047;
+            text-align: center;
+            animation: fadeIn 1s;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        #heart {
+            font-size: 100px;
+            animation: heartbeat 1.5s infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
-    <div id="prompt">Will you go out with me?</div>
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
-    <div id="success">🎉 Hooray! You've unlocked perks! 🎉</div>
-    <canvas id="confetti"></canvas>
-
+    <h1>Happy Valentine's Day!</h1>
+    <div id="heart">❤️</div>
+    <p>Welcome to our romantic Valentine's Day app!</p>
+    <p>Are you ready to explore multiple romantic screens? Let's go!</p>
+    <div>
+        <button onclick="startApp()">Start Your Journey</button>
+    </div>
     <script>
-        const yesBtn = document.getElementById('yesBtn');
-        const noBtn = document.getElementById('noBtn');
-        const successMsg = document.getElementById('success');
-        const canvas = document.getElementById('confetti');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        yesBtn.onclick = () => {
-            successMsg.style.display = 'block';
-            startConfetti();
-        };
-
-        noBtn.onclick = () => {
-            noBtn.style.transform = 'translate(100px)';
-            setTimeout(() => { noBtn.style.transform = ''; }, 500);
-        };
-
-        function startConfetti() {
-            // Basic confetti effect
-            let particles = [];
-            for (let i = 0; i < 100; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 5 + 2,
-                    color: 'hsl(' + Math.random() * 360 + ', 100%, 50%)',
-                    gravity: Math.random() * 3 + 1
-                });
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach((p, index) => {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = p.color;
-                    ctx.fill();
-                    p.y += p.gravity;
-                    if (p.y > canvas.height) particles.splice(index, 1);
-                });
-                requestAnimationFrame(animate);
-            }
-            animate();
+        function startApp() {
+            alert("Let's create wonderful memories this Valentine's Day!");
+            // Here, you can add further interactive elements and navigate to other screens.
         }
     </script>
 </body>

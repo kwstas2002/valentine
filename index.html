@@ -3,45 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine's Day!</title>
+    <title>Valentine's Day App</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #ffcccb;
-        }
-        .heart {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            background-color: red;
-            transform: rotate(-45deg);
-            margin: 30px;
-        }
-        .heart:before,
-        .heart:after {
-            content: "";
-            background-color: red;
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            position: absolute;
-        }
-        .heart:before {
-            top: -50px;
-            left: 0;
-        }
-        .heart:after {
-            left: 50px;
-            top: 0;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 20px; }
+        #prompt { font-size: 24px; margin-bottom: 20px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        #success { display: none; font-size: 28px; color: green; margin-top: 20px; }
+        #confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
     </style>
 </head>
 <body>
-    <div class="heart"></div>
-    <h1>Happy Valentine's Day!</h1>
+    <div id="prompt">Will you go out with me?</div>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+    <div id="success">🎉 Hooray! You've unlocked perks! 🎉</div>
+    <canvas id="confetti"></canvas>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const successMsg = document.getElementById('success');
+        const canvas = document.getElementById('confetti');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        yesBtn.onclick = () => {
+            successMsg.style.display = 'block';
+            startConfetti();
+        };
+
+        noBtn.onclick = () => {
+            noBtn.style.transform = 'translate(100px)';
+            setTimeout(() => { noBtn.style.transform = ''; }, 500);
+        };
+
+        function startConfetti() {
+            // Basic confetti effect
+            let particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 5 + 2,
+                    color: 'hsl(' + Math.random() * 360 + ', 100%, 50%)',
+                    gravity: Math.random() * 3 + 1
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p, index) => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                    p.y += p.gravity;
+                    if (p.y > canvas.height) particles.splice(index, 1);
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    </script>
 </body>
 </html>

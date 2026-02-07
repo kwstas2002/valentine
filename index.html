@@ -3,65 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stitch and Lilo's Romantic Screens</title>
+    <title>Our Valentine's Day Journey 💕</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            text-align: center;
-            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #ff69b4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
-        .screen {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin: 20px auto;
-            padding: 20px;
-            width: 300px;
-            transition: transform 0.3s;
-        }
-        .screen:hover {
-            transform: scale(1.05);
-        }
-        img {
+
+        .floating-hearts {
+            position: fixed;
             width: 100%;
+            height: 100%;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.6;
+            animation: float 6s infinite ease-in;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) translateX(0);
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(100px);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stitch-image {
+            width: 100%;
+            max-width: 300px;
             height: auto;
-            border-radius: 10px;
+            border-radius: 20px;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
         }
-        button {
-            padding: 10px 20px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #ff69b4;
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        h1 {
+            color: #ff1493;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 5px #ff1493;
+            }
+            50% {
+                text-shadow: 0 0 20px #ff1493;
+            }
+        }
+
+        .subtitle {
+            color: #b30047;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #00d084 0%, #00a86b 100%);
             color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 208, 132, 0.4);
+            font-weight: bold;
         }
-        button:hover {
-            background-color: #ff1493;
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(0, 208, 132, 0.6);
+        }
+
+        .no-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+            font-weight: bold;
+            position: relative;
+        }
+
+        .no-btn:hover {
+            transform: translate(150px, -80px);
+        }
+
+        .success-container {
+            display: none;
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .success-container h2 {
+            color: #ff1493;
+            font-size: 2.2em;
+            margin: 20px 0;
+        }
+
+        .perks {
+            background: linear-gradient(135deg, #ffe6f2 0%, #ffc0e0 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #ff1493;
+        }
+
+        .perk-item {
+            color: #b30047;
+            font-size: 1.2em;
+            padding: 12px 0;
+            font-weight: bold;
+        }
+
+        .celebration-emoji {
+            font-size: 3em;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotateZ(360deg);
+                opacity: 0;
+            }
+        }
+
+        .screen-2 {
+            display: none;
+        }
+
+        .screen-3 {
+            display: none;
+        }
+
+        .message-box {
+            background: linear-gradient(135deg, #fff0f7 0%, #ffe6f2 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #ff1493;
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .emoji-row {
+            font-size: 2em;
+            margin: 15px 0;
+            letter-spacing: 10px;
+        }
+
+        .back-btn {
+            background: #888;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #555;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
-    <h1>Stitch and Lilo's Romantic Moments</h1>
-    <div class="screen">
-        <img src="stitch-lilo-romantic.jpg" alt="Stitch and Lilo" />
-        <h2>Moment 1</h2>
-        <p>Enjoy a beautiful sunset with Stitch and Lilo.</p>
-        <button onclick="alert('You clicked Moment 1!')">View More</button>
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- SCREEN 1: Initial Question -->
+    <div class="container screen-1" id="screen1">
+        <h1>💕 Will You Be Mine? 💕</h1>
+        <p class="subtitle">Our Valentine's Day Adventure</p>
+        
+        <img src="https://i.pinimg.com/736x/5e/c0/d3/5ec0d3e3d0e13c97ae9ddc9ece8a4d9.jpg" alt="Stitch and Lilo" class="stitch-image">
+        
+        <p class="description">
+            Just like Stitch found Lilo, I found someone special... 💙💕
+        </p>
+        <p class="description">
+            Every moment with you feels like magic. Will you make this Valentine's Day unforgettable with me?
+        </p>
+
+        <div class="emoji-row">😍 💕 🌹 💑 ✨</div>
+
+        <div class="buttons">
+            <button class="yes-btn" onclick="goToScreen2()">YES! 💚 Let's Go!</button>
+            <button class="no-btn" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">Maybe... 😳</button>
+        </div>
     </div>
-    <div class="screen">
-        <img src="stitch-lilo-kiss.jpg" alt="Stitch and Lilo Kiss" />
-        <h2>Moment 2</h2>
-        <p>A sweet kiss under the stars.</p>
-        <button onclick="alert('You clicked Moment 2!')">View More</button>
+
+    <!-- SCREEN 2: Story -->
+    <div class="container screen-2" id="screen2">
+        <h1>💌 Our Love Story 💌</h1>
+        
+        <img src="https://i.pinimg.com/736x/5e/c0/d3/5ec0d3e3d0e13c97ae9ddc9ece8a4d9.jpg" alt="Stitch and Lilo" class="stitch-image">
+        
+        <div class="message-box">
+            <p>✨ From the first moment I met you, you've filled my world with colors I never knew existed.</p>
+            <p style="margin-top: 15px;">🌹 Every laugh, every glance, every moment together is a treasure I'll cherish forever.</p>
+            <p style="margin-top: 15px;">💝 You're not just my love, you're my adventure, my home, my everything.</p>
+        </div>
+
+        <div class="emoji-row">🥰 🌹 💑 🎀 💫</div>
+
+        <div class="buttons">
+            <button class="yes-btn" onclick="goToScreen3()">Continue to Next 💕</button>
+            <button class="back-btn" onclick="goToScreen1()">Back</button>
+        </div>
     </div>
-    <div class="screen">
-        <img src="stitch-lilo-dance.jpg" alt="Stitch and Lilo Dance" />
-        <h2>Moment 3</h2>
-        <p>Dance the night away with Stitch and Lilo.</p>
-        <button onclick="alert('You clicked Moment 3!')">View More</button>
+
+    <!-- SCREEN 3: Success -->
+    <div class="container screen-3" id="screen3">
+        <div class="success-container" id="successContent">
+            <div class="celebration-emoji">🎉</div>
+            <h2>You've Made Me The Happiest! 💕</h2>
+            
+            <img src="https://i.pinimg.com/736x/5e/c0/d3/5ec0d3e3d0e13c97ae9ddc9ece8a4d9.jpg" alt="Stitch and Lilo" class="stitch-image">
+            
+            <p class="description" style="color: #ff1493; font-size: 1.3em; font-weight: bold;">
+                Just like Stitch says: "Meega love you!" 💙
+            </p>
+
+            <div class="perks">
+                <h3 style="color: #ff1493; margin-bottom: 15px;">🎁 What You've Unlocked:</h3>
+                <div class="perk-item">💕 Infinite cuddles and hugs</div>
+                <div class="perk-item">🌹 Romantic date nights under the stars</div>
+                <div class="perk-item">🍫 Sweet treats and surprises</div>
+                <div class="perk-item">🎵 Our favorite songs playlist</div>
+                <div class="perk-item">🌙 Forever in my heart</div>
+                <div class="perk-item">💑 A love that grows stronger each day</div>
+            </div>
+
+            <div class="emoji-row">💕 🌹 💑 💍 ✨ 🎊</div>
+
+            <p class="message-box">
+                <strong>Happy Valentine's Day! 💕</strong><br><br>
+                You are my greatest adventure, my favorite person, and my forever love. Let's make every day feel like Valentine's Day.
+            </p>
+
+            <button class="yes-btn" onclick="triggerConfetti()">Celebrate! 🎊</button>
+            <button class="back-btn" onclick="goToScreen1()">Start Over</button>
+        </div>
     </div>
+
+    <script>
+        // Create floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const hearts = ['❤️', '💕', '💖', '💗', '💝', '🌹', '💑'];
+            
+            for (let i = 0; i < 25; i++) {
+                const heart = document.createElement('div');
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.animationDuration = (Math.random() * 3 + 6) + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        // Screen navigation
+        function goToScreen2() {
+            document.getElementById('screen1').style.display = 'none';
+            document.getElementById('screen2').style.display = 'block';
+            document.getElementById('screen3').style.display = 'none';
+        }
+
+        function goToScreen3() {
+            document.getElementById('screen1').style.display = 'none';
+            document.getElementById('screen2').style.display = 'none';
+            document.getElementById('screen3').style.display = 'block';
+        }
+
+        function goToScreen1() {
+            document.getElementById('screen1').style.display = 'block';
+            document.getElementById('screen2').style.display = 'none';
+            document.getElementById('screen3').style.display = 'none';
+            document.getElementById('noBtn').style.transform = '';
+        }
+
+        // Move the "no" button
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const randomX = Math.random() * 300 - 150;
+            const randomY = Math.random() * 300 - 150;
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            
+            const messages = ['Maybe... 😳', 'Hmm... 😊', 'Not yet? 💭', 'Think again! 😉', 'You sure? 😏'];
+            noBtn.textContent = messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        // Trigger confetti
+        function triggerConfetti() {
+            const confetti = ['🎉', '🎊', '💕', '💖', '💗', '✨', '🌹', '💑', '💘', '🎀', '💝', '🌟'];
+            
+            for (let i = 0; i < 50; i++) {
+                const conf = document.createElement('div');
+                conf.textContent = confetti[Math.floor(Math.random() * confetti.length)];
+                conf.className = 'confetti';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.top = '-50px';
+                conf.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+                conf.style.animation = `confetti-fall ${Math.random() * 2 + 2}s ease-in forwards`;
+                document.body.appendChild(conf);
+                
+                setTimeout(() => conf.remove(), 3000);
+            }
+        }
+
+        // Initialize
+        createFloatingHearts();
+    </script>
 </body>
 </html>
